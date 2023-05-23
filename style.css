@@ -1,0 +1,164 @@
+:root {
+  --card-color: #1e1e1e;
+  --card-hover: #151515;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+.container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(213, 39, 190, 1) 35%,
+    rgba(146, 23, 144, 1) 65%,
+    rgba(57, 0, 80, 1) 100%
+  );
+  padding: 2%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.box {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  width: 650px;
+  height: 500px;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  gap: 1rem;
+}
+.card {
+  cursor: pointer;
+  display: flex;
+  background-color: var(--card-color);
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+.card:hover {
+  background-color: var(--card-hover);
+}
+.flip-animation {
+  animation: flip 0.5s;
+}
+.back-animation {
+  animation: flip-back 0.5s;
+}
+.match-animation {
+  animation: match 0.5s;
+}
+button {
+  cursor: pointer;
+  width: 147px;
+  height: 35px;
+  border-radius: 5px;
+  border: none;
+  margin-top: 1rem;
+  background-color: var(--card-color);
+  color: white;
+  transition: all 0.3s;
+  font-weight: bold;
+}
+button:hover {
+  background-color: var(--card-hover);
+}
+img {
+  width: 60%;
+  height: 60%;
+  opacity: 0;
+}
+.start{
+  display: none;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+}
+.start h1{
+  color: white;
+  text-shadow: 0px 0px 5px rgba(0,0,0,0.6);
+  font-size: 80px;
+}
+
+@keyframes flip {
+  0% {
+    transform: perspective(400px) rotateY(0);
+    animation-timing-function: ease-out;
+  }
+  40% {
+    transform: perspective(400px) translateZ(150px) rotateY(170deg);
+    animation-timing-function: ease-out;
+  }
+  50% {
+    transform: perspective(400px) translateZ(150px) rotateY(190deg) scale(1);
+    animation-timing-function: ease-in;
+  }
+  80% {
+    transform: perspective(400px) rotateY(360deg) scale(0.95);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: perspective(400px) scale(1);
+    animation-timing-function: ease-in;
+  }
+}
+
+@keyframes flip-back {
+  0% {
+    transform: perspective(400px) scale(1);
+    animation-timing-function: ease-in;
+  }
+  40% {
+    transform: perspective(400px) rotateY(360deg) scale(0.95);
+    animation-timing-function: ease-in;
+  }
+  50% {
+    transform: perspective(400px) translateZ(100px) rotateY(190deg) scale(1);
+    animation-timing-function: ease-in;
+  }
+  80% {
+    transform: perspective(400px) translateZ(100px) rotateY(170deg);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: perspective(400px) rotateY(0);
+    animation-timing-function: ease-out;
+  }
+}
+
+@keyframes match {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .box {
+    width: 450px;
+    height: 350px;
+    padding: 0.7rem;
+    gap: 0.7rem;
+  }
+}
+@media screen and (max-width: 465px) {
+  .box {
+    width: 350px;
+    height: 250px;
+    padding: 0.5rem;
+    gap: 0.5rem;
+  }
+}
