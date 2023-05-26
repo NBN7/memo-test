@@ -67,6 +67,7 @@ button {
   color: white;
   transition: all 0.3s;
   font-weight: bold;
+  user-select: none;
 }
 button:hover {
   background-color: var(--card-hover);
@@ -75,6 +76,7 @@ img {
   width: 60%;
   height: 60%;
   opacity: 0;
+  user-select: none;
 }
 .start{
   display: none;
@@ -116,24 +118,24 @@ img {
 
 @keyframes flip-back {
   0% {
-    transform: perspective(400px) scale(1);
-    animation-timing-function: ease-in;
+    transform: perspective(400px) rotateY(0);
+    animation-timing-function: ease-out;
   }
   40% {
-    transform: perspective(400px) rotateY(360deg) scale(0.95);
-    animation-timing-function: ease-in;
+    transform: perspective(400px) translateZ(100px) rotateY(170deg);
+    animation-timing-function: ease-out;
   }
   50% {
     transform: perspective(400px) translateZ(100px) rotateY(190deg) scale(1);
     animation-timing-function: ease-in;
   }
   80% {
-    transform: perspective(400px) translateZ(100px) rotateY(170deg);
-    animation-timing-function: ease-out;
+    transform: perspective(400px) rotateY(360deg) scale(0.95);
+    animation-timing-function: ease-in;
   }
   100% {
-    transform: perspective(400px) rotateY(0);
-    animation-timing-function: ease-out;
+    transform: perspective(400px) scale(1);
+    animation-timing-function: ease-in;
   }
 }
 
