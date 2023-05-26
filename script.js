@@ -2,6 +2,7 @@ const cards = document.querySelectorAll(".card");
 const startBtn = document.querySelector("button");
 const startScreen = document.querySelector(".start");
 const startText = document.querySelector("h1");
+const box = document.querySelector(".box");
 
 let nums = [
   "./Images/poop.png",
@@ -17,7 +18,6 @@ let nums = [
   "./Images/ninja.png",
   "./Images/wizard.png",
 ];
-const randomNums = [];
 
 const img = document.querySelectorAll("img");
 
@@ -31,30 +31,32 @@ startBtn.addEventListener("click", () => {
   if (startBtn.textContent === "Start Game") {
     startBtn.textContent = "New Game";
 
-    startScreen.style.display = "flex";
-    setTimeout(() => {
-      startText.textContent = "2";
-    }, 1000);
-
-    setTimeout(() => {
-      startText.textContent = "1";
-    }, 2000);
+    startCounter();
 
     setTimeout(() => {
       startScreen.style.display = "none";
+
       for (let i = 0; i < img.length; i++) {
         let random = getRandom(nums.length);
         img[i].src = nums[random];
         nums.splice(random, 1);
         img[i].style.opacity = 1;
 
+        box.style.pointerEvents = "none";
+
         setTimeout(() => {
-          hideCards(img[i]);
-        }, 1200);
+          hideCards(img[i]);          
+          box.style.pointerEvents = "auto";
+        }, 2000);
       }
 
       for (let i = 0; i < cards.length; i++) {
         cards[i].addEventListener("click", () => {
+
+          setTimeout(() => {
+            box.style.pointerEvents = "auto";
+          }, 600);
+
           if (flag === false) {
             firstSelected = cards[i].lastChild.src;
             firstIndex = i;
@@ -80,7 +82,7 @@ startBtn.addEventListener("click", () => {
 
               setTimeout(() => {
                 removeAnimation(cards[firstIndex], cards[secondIndex]);
-              }, 1500);
+              }, 970);
             } else {
               resetValues();
 
@@ -98,12 +100,24 @@ startBtn.addEventListener("click", () => {
   }
 });
 
+function startCounter(){
+  startScreen.style.display = "flex";
+    setTimeout(() => {
+      startText.textContent = "2";
+    }, 1000);
+
+    setTimeout(() => {
+      startText.textContent = "1";
+    }, 2000);
+}
+
 function hideCards(img) {
   img.style.opacity = 0;
 }
 
 function addAnimation(card) {
   card.classList.add("flip-animation");
+  box.style.pointerEvents = "none";
 }
 
 function getRandom(max) {
