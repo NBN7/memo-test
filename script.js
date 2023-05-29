@@ -1,10 +1,15 @@
 const cards = document.querySelectorAll(".card");
-const startBtn = document.querySelector("button");
-const startScreen = document.querySelector(".start");
-const startText = document.querySelector("h1");
 const box = document.querySelector(".box");
 
-let nums = [
+const startBtn = document.querySelector("button");
+
+const loadScreen = document.querySelector(".load-screen");
+const loadText = document.querySelector("#load-number");
+
+const winScreen = document.querySelector(".win");
+const winBtn = document.querySelector("h4");
+
+let imgArr = [
   "./Images/poop.png",
   "./Images/ghost.png",
   "./Images/rock.png",
@@ -25,21 +30,22 @@ let flag = false,
   firstSelected = "",
   firstIndex,
   secondSelected = "",
-  secondIndex;
+  secondIndex,
+  matchCards = 0;
 
 startBtn.addEventListener("click", () => {
   if (startBtn.textContent === "Start Game") {
     startBtn.textContent = "New Game";
 
-    startCounter();
+    showLoadScreen();
 
     setTimeout(() => {
-      startScreen.style.display = "none";
+      loadScreen.style.display = "none";
 
       for (let i = 0; i < img.length; i++) {
-        let random = getRandom(nums.length);
-        img[i].src = nums[random];
-        nums.splice(random, 1);
+        let random = getRandom(imgArr.length);
+        img[i].src = imgArr[random];
+        imgArr.splice(random, 1);
         img[i].style.opacity = 1;
 
         box.style.pointerEvents = "none";
@@ -89,6 +95,10 @@ startBtn.addEventListener("click", () => {
               setTimeout(() => {
                 match(cards[firstIndex], cards[secondIndex]);
               }, 600);
+
+              setTimeout(() => {
+                showWinScreen();
+              }, 1300);
             }
           }
         });
@@ -100,14 +110,14 @@ startBtn.addEventListener("click", () => {
   }
 });
 
-function startCounter(){
-  startScreen.style.display = "flex";
+function showLoadScreen(){
+  loadScreen.style.display = "flex";
     setTimeout(() => {
-      startText.textContent = "2";
+      loadText.textContent = "2";
     }, 1000);
 
     setTimeout(() => {
-      startText.textContent = "1";
+      loadText.textContent = "1";
     }, 2000);
 }
 
@@ -135,6 +145,8 @@ function match(cardFirstIndex, cardSecondIndex) {
 
   cardSecondIndex.classList.add("match-animation");
   cardSecondIndex.style.pointerEvents = "none";
+
+  matchCards++;
 }
 
 function notMatch(cardFirstIndex, cardSecondIndex) {
@@ -150,4 +162,14 @@ function notMatch(cardFirstIndex, cardSecondIndex) {
 function removeAnimation(cardFirstIndex, cardSecondIndex) {
   cardFirstIndex.classList.remove("back-animation");
   cardSecondIndex.classList.remove("back-animation");
+}
+
+function showWinScreen(){
+  if (matchCards === 6){
+    winScreen.style.display = "flex";
+  }
+
+  winBtn.addEventListener("click", () => {
+    location.reload();
+  })
 }
