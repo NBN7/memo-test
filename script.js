@@ -51,14 +51,13 @@ startBtn.addEventListener("click", () => {
         box.style.pointerEvents = "none";
 
         setTimeout(() => {
-          hideCards(img[i]);          
+          hideCards(img[i]);
           box.style.pointerEvents = "auto";
         }, 2000);
       }
 
       for (let i = 0; i < cards.length; i++) {
         cards[i].addEventListener("click", () => {
-
           setTimeout(() => {
             box.style.pointerEvents = "auto";
           }, 600);
@@ -77,8 +76,10 @@ startBtn.addEventListener("click", () => {
           setTimeout(() => {
             cards[i].lastChild.style.opacity = 1;
           }, 350);
+          cards[firstIndex].style.pointerEvents = "none";
 
           if (firstSelected !== "" && secondSelected !== "") {
+            cards[firstIndex].style.pointerEvents = "auto";
             if (firstSelected !== secondSelected) {
               resetValues();
 
@@ -110,15 +111,15 @@ startBtn.addEventListener("click", () => {
   }
 });
 
-function showLoadScreen(){
+function showLoadScreen() {
   loadScreen.style.display = "flex";
-    setTimeout(() => {
-      loadText.textContent = "2";
-    }, 1000);
+  setTimeout(() => {
+    loadText.textContent = "2";
+  }, 1000);
 
-    setTimeout(() => {
-      loadText.textContent = "1";
-    }, 2000);
+  setTimeout(() => {
+    loadText.textContent = "1";
+  }, 2000);
 }
 
 function hideCards(img) {
@@ -164,12 +165,12 @@ function removeAnimation(cardFirstIndex, cardSecondIndex) {
   cardSecondIndex.classList.remove("back-animation");
 }
 
-function showWinScreen(){
-  if (matchCards === 6){
+function showWinScreen() {
+  if (matchCards === 6) {
     winScreen.style.display = "flex";
   }
 
   winBtn.addEventListener("click", () => {
     location.reload();
-  })
+  });
 }
